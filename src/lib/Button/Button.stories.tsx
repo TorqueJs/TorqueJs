@@ -1,6 +1,8 @@
 import React from 'react';
 import { TorqueButton } from './Button.Component';
 import { ComponentStory } from '@storybook/react';
+import { TorqueService } from '../Torque';
+import { DefaultThemes } from '../Types/Theme';
 
 export default {
     title: 'TorqueButton',
@@ -17,7 +19,6 @@ export default {
                 name: 'string',
                 require: true
             },
-            defaultValue: 'Submit',
             description: 'Button Text',
             control: {
                 type: 'text'
@@ -29,6 +30,11 @@ export default {
     }
 }
 
-const Template: ComponentStory<typeof TorqueButton> = (args) => <TorqueButton {...args} />;
+const Template: ComponentStory<typeof TorqueButton> = (args) => {
+    TorqueService.setTheme(DefaultThemes.CERULEAN);
+    return (
+        <TorqueButton {...args} />
+    );
+};
 
 export const _TorqueButton = Template.bind({});
