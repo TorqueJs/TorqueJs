@@ -1,6 +1,8 @@
 import { 
-    TorqueButtonAttributes, 
-    TorqueCheckboxAttributes 
+    ComponentAttributes, 
+    ComponentStyling, 
+    TorqueButtonConfig,
+    TorqueCheckboxConfig,
 } from "./ComponentStyles";
 
 export enum DefaultThemes {
@@ -8,6 +10,19 @@ export enum DefaultThemes {
 }
 
 export interface Theme {
-    TORQUE_BUTTON: TorqueButtonAttributes;
-    TORQUE_CHECKBOX: TorqueCheckboxAttributes;
+    primaryColor: string;
+    secondaryColor: string;
+    ternaryColor?: string;
+    TORQUE_BUTTON?: TorqueButtonAttributes | TorqueButtonAttributes[];
+    TORQUE_CHECKBOX?: TorqueCheckboxAttributes | TorqueCheckboxAttributes[];
+}
+
+export interface TorqueButtonAttributes extends ComponentAttributes {
+    styles: ComponentStyling;
+    config: TorqueButtonConfig;
+}
+
+export interface TorqueCheckboxAttributes extends ComponentAttributes {
+    styles: ComponentStyling;
+    config: TorqueCheckboxConfig;
 }

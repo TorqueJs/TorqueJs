@@ -1,9 +1,9 @@
-import { ComponentStyles, ComponentType, TorqueButtonAttributes } from "../Types/ComponentStyles";
+import { ComponentAttributes, ComponentStyles, ComponentStyling, ComponentType } from "../Types/ComponentStyles";
 import { 
     TorqueButtonRequiredAttributeNames, 
     TorqueCheckboxRequiredAttributeNames 
 } from '../Types/ComponentRequiredAttributes';
-import { DefaultThemes, Theme } from "../Types/Theme";
+import { DefaultThemes, Theme, TorqueButtonAttributes } from "../Types/Theme";
 import { BehaviorSubject } from "../Utils/BehaviorSubject";
 import { CeruleanTheme } from "../Themes/Cerulean/defaults.config";
 
@@ -13,9 +13,12 @@ export class StylesService {
     private hasInitialized: boolean;
     private componentStyles: ComponentStyles[] = [];
     private customStyles: ComponentStyles[] = [];
+    primary: string;
+    secondary: string;
+    ternary: string;
 
-    torqueButtonSubject: BehaviorSubject<ComponentStyles> = new BehaviorSubject({ component: ComponentType.TORQUE_BUTTON, attributes: {} });
-    torqueCheckboxSubject: BehaviorSubject<ComponentStyles> = new BehaviorSubject({ component: ComponentType.TORQUE_CHECKBOX, attributes: {} });
+    torqueButtonSubject: BehaviorSubject<ComponentStyles> = new BehaviorSubject({ component: ComponentType.TORQUE_BUTTON, attributes: { styles: <any>{} } });
+    torqueCheckboxSubject: BehaviorSubject<ComponentStyles> = new BehaviorSubject({ component: ComponentType.TORQUE_CHECKBOX, attributes: { styles: <any>{} } });
 
     private constructor() {}
 
@@ -26,7 +29,7 @@ export class StylesService {
         return StylesService.instance;
     }
 
-    init(initialTheme: DefaultThemes) {
+    init(initialTheme: DefaultThemes | Theme) {
         if (!this.hasInitialized) {
             this.initializeDefaultStyles(initialTheme);
         } else {
@@ -38,7 +41,8 @@ export class StylesService {
 
     addComponentStyle = (componentStyle: ComponentStyles) => {
         if (!this.hasInitialized) {
-            console.warn(`Please initialize a theme using 'TorqueService.setTheme()' before adding custom component attribute styles as they will be overriden by the theme initialization.`)
+            console.warn(`Please initialize a theme using 'TorqueService.setTheme()' before adding custom component attribute styles as they will be overriden by the theme initialization.`);
+            return;
         }
 
         const hasAllRequiredProps = this.verifyRequiredPropsForGivenComponentType(componentStyle);
@@ -65,20 +69,97 @@ export class StylesService {
         if (!style) {
             console.warn(`Theme not initialized correctly. Please call 'TorqueService.setTheme()' to initialize the Torque Styles.`);
             // TODO: FALLBACK to a default of default themes.
-            return { component: type, attributes: {}}
+            return { component: type, attributes: { styles: <any>{}}}
         } else {
             return style;
         }
     }
 
-    private initializeDefaultStyles = (theme: DefaultThemes): void => {
+    getAttributesByIdentifier = (componentStyles: ComponentStyles, identifier: string | number = 0): ComponentAttributes => {
+        if (Array.isArray(componentStyles.attributes)) {
+            if (typeof identifier === 'string') {
+                let identifiedAttributes: ComponentAttributes | undefined = componentStyles.attributes.find((attribs: ComponentAttributes) => attribs.identifier === identifier);
+                if (identifiedAttributes) {
+                    return identifiedAttributes;
+                } else {
+                    console.warn(`Could not find style attributes for component ${identifier}. Please make sure either the identifier exists for the specific component or select a component by an identifier that exists.`);
+                    return { styles: { default: {} } } as ComponentAttributes;
+                }
+            } else {
+                return componentStyles.attributes[identifier];
+            }
+        } else {
+            return componentStyles.attributes;
+        }
+    }
+
+    getAllPseudoClasses = (styles: ComponentStyling, overrides: ComponentStyling): any => {
+        return {
+            '&&:focus': {
+                ...styles.focus,
+                ...overrides.focus
+            },
+            '&&:hover': {
+                ...styles.hover,
+                ...overrides.hover
+            },
+            '&&:active': {
+                ...styles.active,
+                ...overrides.active
+            },
+            '&&::before': {
+                ...styles.before,
+                ...overrides.before
+            },
+            '&&::after': {
+                ...styles.after,
+                ...overrides.after
+            },
+            '&&:first-child': {
+                ...styles.firstChild,
+                ...overrides.firstChild
+            },
+            '&&:checked': {
+                ...styles.checked,
+                ...overrides.checked                
+            },
+            '&&:disabled': {
+                ...styles.disabled,
+                ...overrides.disabled                
+            },
+            '&&:invalid': {
+                ...styles.invalid,
+                ...overrides.invalid                
+            },
+            '&&:first-of-type': {
+                ...styles.firstOfType,
+                ...overrides.firstOfType                
+            },
+            '&&:last-child': {
+                ...styles.lastChild,
+                ...overrides.lastChild                
+            },
+            '&&:last-of-type': {
+                ...styles.lastOfType,
+                ...overrides.lastOfType                
+            },
+        }
+    }
+
+    private initializeDefaultStyles = (theme: DefaultThemes | Theme): void => {
         this.hasInitialized = true;
-        let selectedTheme: Theme;
-        switch (theme) {
-            case DefaultThemes.CERULEAN: {
-                selectedTheme = CeruleanTheme;
+        let selectedTheme: Theme = <Theme>theme;
+        if (typeof theme === 'number') {
+            switch (theme) {
+                case DefaultThemes.CERULEAN: {
+                    selectedTheme = CeruleanTheme;
+                }
             }
         }
+
+        this.primary = selectedTheme.primaryColor;
+        this.secondary = selectedTheme.secondaryColor;
+        this.ternary = selectedTheme.ternaryColor ? selectedTheme.ternaryColor : '';
 
         Object.keys(selectedTheme).forEach((value: string) => {
             switch (value) {
@@ -93,9 +174,18 @@ export class StylesService {
         let result: {valid: boolean; invalidProps: string[]} = { valid: true, invalidProps: [] };
         const extractInvalidAttributes = (obj: string[]): void => {
             obj.forEach((value: string) => {
-                if (!Object.keys(componentStyle.attributes).includes(value)) {
-                    result.invalidProps.push(value);
-                    result.valid = false;
+                if (Array.isArray(componentStyle.attributes)) {
+                    componentStyle.attributes.forEach((attribs: ComponentAttributes) => {
+                        if (!Object.keys(attribs.styles.default).includes(value)) {
+                            result.invalidProps.push(value);
+                            result.valid = false;
+                        }
+                    })
+                } else {
+                    if (!Object.keys(componentStyle.attributes.styles.default).includes(value)) {
+                        result.invalidProps.push(value);
+                        result.valid = false;
+                    }
                 }
             });
         }

@@ -8,6 +8,10 @@ export class BehaviorSubject<T> {
         this.currentValue = props;
     }
 
+    getCurrentValue = () => {
+        return this.currentValue;
+    }
+
     subscribe = (subscriberName: string, cb: (value: T) => void) => {
         this._subscribers.push({ subscriberName, cb });
         cb(this.currentValue);

@@ -1,5 +1,4 @@
 
 
-export const TorqueButtonRequiredAttributeNames = ['fontSize', 'color', 'backgroundColor']
-
+export const TorqueButtonRequiredAttributeNames = []
 export const TorqueCheckboxRequiredAttributeNames = [];

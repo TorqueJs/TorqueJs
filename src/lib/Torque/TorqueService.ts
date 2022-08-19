@@ -1,10 +1,10 @@
 import { ComponentStyles } from "../Types/ComponentStyles";
-import { DefaultThemes } from "../Types/Theme";
+import { DefaultThemes, Theme } from "../Types/Theme";
 import { StylesService } from "./StylesService";
 
 class _TorqueService {
 
-    setTheme(theme: DefaultThemes) {
+    setTheme(theme: DefaultThemes | Theme) {
         StylesService.getInstance().init(theme);
     }
 

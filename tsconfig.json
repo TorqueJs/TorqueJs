@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "compile",
     "module": "esnext",
     "lib": ["dom", "esnext"],
     "moduleResolution": "node",
     "jsx": "react",
-    "sourceMap": true,
-    "declaration": true,
+    "sourceMap": false,
+    "declaration": false,
     "esModuleInterop": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
@@ -18,5 +18,5 @@
     "allowSyntheticDefaultImports": true
   },
   "include": ["src"],
-  "exclude": ["node_modules", "dist", "example"]
+  "exclude": ["node_modules", "dist", "example", "src/setupTests.ts", "src/**/*.spec.ts"]
 }
