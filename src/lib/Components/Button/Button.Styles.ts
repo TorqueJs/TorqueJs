@@ -12,7 +12,6 @@ const _TorqueButtonAnimated: any = styled('button')((props: any) => {
             }
         }
     }
-    console.log(props.theme);
     return {
         display: 'flex',
         flexDirection: 'row',

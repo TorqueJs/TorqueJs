@@ -11,7 +11,6 @@ describe('Torque Accordian', () => {
 
     it('Should Render', () => {
         let json: ReactTestRendererJSON = component.toJSON() as ReactTestRendererJSON;
-        console.log(json.type);
-        expect(json.type)
+        expect(json.props).toBeDefined();
     })
 });
