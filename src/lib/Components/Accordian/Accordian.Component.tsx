@@ -1,7 +1,7 @@
-import React, { RefObject } from 'react';
+import React from 'react';
 import { StylesService } from '../../Torque/StylesService';
 import { ComponentType, ComponentAttributes, ComponentStyles } from '../../Types';
-import { GenerateGuid } from '../../Utils/GenerateGuid';
+import { WithBehaviorSubject } from '../../Utils/WithBehaviorSubject';
 import { _TorqueAccordianWrapper } from './Accordian.Styles';
 import { TorqueAccordianProps } from './Accordian.Types';
 import { TorqueAccordianContent } from './AccordianContent.Component';
@@ -9,11 +9,10 @@ import { TorqueAccordianHeader } from './AccordianHeader.Component';
 
 interface TorqueAccordianState {
     componentStyles: ComponentStyles;
-    subscriptionGuid: string;
     componentAttributes: ComponentAttributes;
 }
 
-export class TorqueAccordian extends React.Component<TorqueAccordianProps, TorqueAccordianState> {
+class TorqueAccordianComponent extends React.Component<TorqueAccordianProps, TorqueAccordianState> {
 
     public static Header = TorqueAccordianHeader;
     public static Content = TorqueAccordianContent;
@@ -23,22 +22,18 @@ export class TorqueAccordian extends React.Component<TorqueAccordianProps, Torqu
         let componentStyles = StylesService.getInstance().getComponentStyle(ComponentType.TORQUE_ACCORDIAN);
         this.state = {
             componentStyles: componentStyles,
-            subscriptionGuid: GenerateGuid(),
-            componentAttributes: StylesService.getInstance().getAttributesByIdentifier(componentStyles, this.props.identifier || 0)
+            componentAttributes: StylesService.getInstance().getAttributesByIdentifier(componentStyles, this.props.identifier || ComponentType.TORQUE_ACCORDIAN)
         }
     }
 
-    componentDidMount(): void {
-        StylesService.getInstance().torqueAccordianSubject.subscribe(this.state.subscriptionGuid, (value: ComponentStyles) => {
+    componentDidUpdate(): void {
+        if (this.props.subjectUpdated) {
+            this.props.subjectDataUsed();
             this.setState({
-                componentStyles: value,
-                componentAttributes: StylesService.getInstance().getAttributesByIdentifier(value, this.props.identifier || 0)
-            })
-        });
-    }
-
-    componentWillUnmount(): void {
-        StylesService.getInstance().torqueAccordianSubject.unsubscribe(this.state.subscriptionGuid);
+                componentStyles: this.props.subjectData,
+                componentAttributes: StylesService.getInstance().getAttributesByIdentifier(this.props.subjectData, this.props.identifier || ComponentType.TORQUE_ACCORDIAN)
+            });
+        }
     }
 
     render(): JSX.Element {
@@ -53,3 +48,8 @@ export class TorqueAccordian extends React.Component<TorqueAccordianProps, Torqu
         )
     }
 }
+
+export const TorqueAccordian = WithBehaviorSubject(
+    TorqueAccordianComponent,
+    StylesService.getInstance().torqueAccordianSubject
+)

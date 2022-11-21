@@ -2,7 +2,7 @@ import React, { RefObject } from 'react';
 import { TorqueButtonProps } from './Button.Types';
 import { _TorqueButton } from './Button.Styles';
 import { StylesService } from '../../Torque/StylesService';
-import { ComponentStyles, ComponentType, ComponentStyling, ComponentAttributes } from '../../Types';
+import { ComponentStyles, ComponentType, ComponentAttributes } from '../../Types';
 import { getIconColor, getIconFontSize, IconProps, TorqueIcon } from '../../Icons/Icon.Component';
 import { WithBehaviorSubject } from '../../Utils/WithBehaviorSubject';
 
@@ -20,7 +20,7 @@ class TorqueButtonComponent extends React.Component<TorqueButtonProps, TorqueBut
         let componentStyles = StylesService.getInstance().getComponentStyle(ComponentType.TORQUE_BUTTON);
         this.state = {
             componentStyles: componentStyles,
-            componentAttributes: StylesService.getInstance().getAttributesByIdentifier(componentStyles, this.props.identifier || 0)
+            componentAttributes: StylesService.getInstance().getAttributesByIdentifier(componentStyles, this.props.identifier || ComponentType.TORQUE_BUTTON)
         };
     }
 
@@ -29,7 +29,7 @@ class TorqueButtonComponent extends React.Component<TorqueButtonProps, TorqueBut
             this.props.subjectDataUsed();
             this.setState({
                 componentStyles: this.props.subjectData,
-                componentAttributes: StylesService.getInstance().getAttributesByIdentifier(this.props.subjectData, this.props.identifier || 0)
+                componentAttributes: StylesService.getInstance().getAttributesByIdentifier(this.props.subjectData, this.props.identifier || ComponentType.TORQUE_BUTTON)
             });
         }
     }
@@ -104,4 +104,7 @@ class TorqueButtonComponent extends React.Component<TorqueButtonProps, TorqueBut
     }
 }
 
-export const TorqueButton = WithBehaviorSubject(TorqueButtonComponent, StylesService.getInstance().torqueButtonSubject);
+export const TorqueButton = WithBehaviorSubject(
+    TorqueButtonComponent,
+    StylesService.getInstance().torqueButtonSubject
+);

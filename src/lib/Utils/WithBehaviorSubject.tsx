@@ -12,13 +12,27 @@ export interface IWithBehaviorSubject<T,> {
     subjectDataUsed: () => void;
 }
 
-function getDisplayName(WrappedComponent: { displayName: string, name: string }) {
+function getDisplayName(WrappedComponent: any) {
     return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }
 
-export const WithBehaviorSubject = function<T,>(ChildComponent: any, subject: BehaviorSubject<T>) {
-    class withBehaviorSubject extends React.Component<{}, { subjectData: T, subscriptionGuid: string, subscriptionChanged: boolean }> {
-        constructor(props: any) {
+interface State<T> { subjectData: T, subscriptionGuid: string, subscriptionChanged: boolean };
+
+export const WithBehaviorSubject = function<
+    T,
+    P extends IWithBehaviorSubject<T>,
+    C,
+    R extends { new (props: P): React.Component<P> },
+>(
+    ChildComponent: R, 
+    subject: BehaviorSubject<T>
+): R {
+    
+    type Props = JSX.LibraryManagedAttributes<C, Omit<P, keyof State<T>>>;
+
+    class HOCWithBehaviorSubject extends React.Component<Props, State<T>> {
+
+        constructor(props: Props) {
             super(props);
             this.state = {
                 subjectData: subject.getCurrentValue(),
@@ -47,17 +61,17 @@ export const WithBehaviorSubject = function<T,>(ChildComponent: any, subject: Be
             subject.unsubscribe(this.state.subscriptionGuid)
         }
 
-        render(): JSX.Element {
+        render(): React.ReactNode {
             return (
                 <ChildComponent 
                     subjectDataUsed={ () => this.subjectDataUsed() } 
                     subjectUpdated={ this.state.subscriptionChanged } 
                     subjectData={ this.state.subjectData } 
-                    { ...this.props } />
+                    { ...(this.props as any) } />
             )
         }
     }
 
-    (withBehaviorSubject as any).displayName = `WithBehaviorSubject${getDisplayName(ChildComponent)}`;
-    return withBehaviorSubject;
+    (HOCWithBehaviorSubject as any).displayName = `WithBehaviorSubject${getDisplayName(ChildComponent)}`;
+    return (HOCWithBehaviorSubject as any) as R;
 }

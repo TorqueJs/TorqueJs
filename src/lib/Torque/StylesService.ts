@@ -480,71 +480,71 @@ export class StylesService {
                 break;
             }
             case ComponentType.TORQUE_ACCORDIAN: {
-                this.torqueBoxSubject.next(componentStyle);
+                this.torqueAccordianSubject.next(componentStyle);
                 break;
             }
             case ComponentType.TORQUE_CARD: {
-                this.torqueBoxSubject.next(componentStyle);
+                this.torqueCardSubject.next(componentStyle);
                 break;
             }
             case ComponentType.TORQUE_DATEPICKER: {
-                this.torqueBoxSubject.next(componentStyle);
+                this.torqueDatepickerSubject.next(componentStyle);
                 break;
             }
             case ComponentType.TORQUE_DIVIDER: {
-                this.torqueBoxSubject.next(componentStyle);
+                this.torqueDividerSubject.next(componentStyle);
                 break;
             }
             case ComponentType.TORQUE_INPUT: {
-                this.torqueBoxSubject.next(componentStyle);
+                this.torqueInputSubject.next(componentStyle);
                 break;
             }
             case ComponentType.TORQUE_MENU: {
-                this.torqueBoxSubject.next(componentStyle);
+                this.torqueMenuSubject.next(componentStyle);
                 break;
             }
             case ComponentType.TORQUE_MODAL: {
-                this.torqueBoxSubject.next(componentStyle);
+                this.torqueModalSubject.next(componentStyle);
                 break;
             }
             case ComponentType.TORQUE_PROGRESS: {
-                this.torqueBoxSubject.next(componentStyle);
+                this.torqueProgressSubject.next(componentStyle);
                 break;
             }
             case ComponentType.TORQUE_RADIO: {
-                this.torqueBoxSubject.next(componentStyle);
+                this.torqueRadioSubject.next(componentStyle);
                 break;
             }
             case ComponentType.TORQUE_SELECT_INPUT: {
-                this.torqueBoxSubject.next(componentStyle);
+                this.torqueSelectInputSubject.next(componentStyle);
                 break;
             }
             case ComponentType.TORQUE_SIDENAV: {
-                this.torqueBoxSubject.next(componentStyle);
+                this.torqueSidenavSubject.next(componentStyle);
                 break;
             }
             case ComponentType.TORQUE_SLIDE_TOGGLE: {
-                this.torqueBoxSubject.next(componentStyle);
+                this.torqueSlideToggleSubject.next(componentStyle);
                 break;
             }
             case ComponentType.TORQUE_SNACKBAR: {
-                this.torqueBoxSubject.next(componentStyle);
+                this.torqueSnackbarSubject.next(componentStyle);
                 break;
             }
             case ComponentType.TORQUE_SPINNER: {
-                this.torqueBoxSubject.next(componentStyle);
+                this.torqueSpinnerSubject.next(componentStyle);
                 break;
             }
             case ComponentType.TORQUE_TABLE: {
-                this.torqueBoxSubject.next(componentStyle);
+                this.torqueTableSubject.next(componentStyle);
                 break;
             }
             case ComponentType.TORQUE_TABS: {
-                this.torqueBoxSubject.next(componentStyle);
+                this.torqueTabsSubject.next(componentStyle);
                 break;
             }
             case ComponentType.TORQUE_TOOLTIP: {
-                this.torqueBoxSubject.next(componentStyle);
+                this.torqueTooltipSubject.next(componentStyle);
                 break;
             }
             default: {

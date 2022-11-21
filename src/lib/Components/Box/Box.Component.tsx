@@ -19,7 +19,7 @@ class TorqueBoxComponent extends React.Component<TorqueBoxProps, TorqueBoxState>
         let componentStyles = StylesService.getInstance().getComponentStyle(ComponentType.TORQUE_BOX);
         this.state = {
             componentStyles: componentStyles,
-            componentAttributes: StylesService.getInstance().getAttributesByIdentifier(componentStyles, this.props.identifier || 0)
+            componentAttributes: StylesService.getInstance().getAttributesByIdentifier(componentStyles, this.props.identifier || ComponentType.TORQUE_BOX)
         }
     }
 
@@ -28,7 +28,7 @@ class TorqueBoxComponent extends React.Component<TorqueBoxProps, TorqueBoxState>
             this.props.subjectDataUsed();
             this.setState({
                 componentStyles: this.props.subjectData,
-                componentAttributes: StylesService.getInstance().getAttributesByIdentifier(this.props.subjectData, this.props.identifier || 0)
+                componentAttributes: StylesService.getInstance().getAttributesByIdentifier(this.props.subjectData, this.props.identifier || ComponentType.TORQUE_BOX)
             });
         }
     }
@@ -52,4 +52,4 @@ class TorqueBoxComponent extends React.Component<TorqueBoxProps, TorqueBoxState>
     }
 }
 
-export const TorqueBox = WithBehaviorSubject(TorqueBoxComponent, StylesService.getInstance().torqueBoxSubject);
+export const TorqueBox: any = WithBehaviorSubject(TorqueBoxComponent, StylesService.getInstance().torqueBoxSubject);

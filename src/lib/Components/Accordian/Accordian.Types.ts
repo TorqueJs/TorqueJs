@@ -1,6 +1,7 @@
-import { ComponentStyling, TorqueOnClickEvent } from "../../Types";
+import { ComponentStyles, ComponentStyling, TorqueOnClickEvent } from "../../Types";
+import { IWithBehaviorSubject } from "../../Utils/WithBehaviorSubject";
 
-export interface TorqueAccordianProps {
+export interface TorqueAccordianProps extends IWithBehaviorSubject<ComponentStyles> {
   identifier?: string;
   themeOverride?: ComponentStyling;
 }
