@@ -14,17 +14,17 @@ const _TorqueButtonAnimated: any = styled('button')((props: any) => {
     }
     return {
         display: 'flex',
-        flexDirection: 'row',
+        'flex-direction': 'row',
         position: 'relative',
         overflow: 'hidden',
-        ...props.theme.styles.default,
-        ...props.themeOverrides.default,
-        ...StylesService.getInstance().getAllPseudoClasses(props.theme.styles, props.themeOverrides),
         ...animation
     }
 });
 
 export const _TorqueButton: any = styled(_TorqueButtonAnimated)`
+    ${(props: any) => StylesService.getInstance().turnStylesIntoCSSString(props.theme.styles.default)}
+    ${(props: any) => StylesService.getInstance().turnStylesIntoCSSString(props.themeOverride.default)}
+    ${(props: any) => StylesService.getInstance().turnStylesIntoCSSString(StylesService.getInstance().getAllPseudoClasses(props.theme.styles, props.themeOverride))}
     && span.ripple {
         animation: ${(props: any) => {
             let animation = keyframes``;

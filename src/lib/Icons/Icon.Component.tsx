@@ -1457,6 +1457,7 @@ import { ReadMore } from './read_more';
 import { Insights } from './insights';
 import { EmojiTransportation } from './emoji_transportation';
 import { KeyboardCapslock } from './keyboard_capslock';
+import { ComponentAttributes, ComponentStyling, TorqueCSSObject } from '../Types';
 
 export type Icons = '3drotation' |
  'accessibility_new' |
@@ -4399,4 +4400,45 @@ export const TorqueIcon = (props: IconProps): JSX.Element => {
             { GetIcon(props) }
         </div>
     )
+}
+
+export const getIconFontSize = (themeOverride: ComponentStyling | undefined, componentAttributes: ComponentAttributes) => {
+    let theme; let override;
+    if (Array.isArray(componentAttributes.styles.default)) {
+        theme = componentAttributes.styles.default.find((v) => Object.keys(v).includes('fontSize'))?.fontSize || null
+    } else {
+        theme = componentAttributes.styles.default.fontSize ? componentAttributes.styles.default.fontSize : null;
+    }
+
+    if (themeOverride) {
+        if(Array.isArray(themeOverride.default)) {
+            override = themeOverride.default.find((v) => Object.keys(v).includes('fontSize'))?.fontSize || null
+        } else {
+            override = themeOverride.default && themeOverride.default.fontSize ? 
+                themeOverride.default.fontSize : null;
+        }
+    } else {
+        override = null;
+    }
+    return override ? override : (theme ? theme : '24');
+}
+
+export const getIconColor = (themeOverride: ComponentStyling | undefined, componentAttributes: ComponentAttributes) => {
+    let theme; let override;
+    if (Array.isArray(componentAttributes.styles.default)) {
+        theme = componentAttributes.styles.default.find((v) => Object.keys(v).includes('color'))?.color || null
+    } else {
+        theme = componentAttributes.styles.default.color ? componentAttributes.styles.default.color : null;
+    }
+
+    if (themeOverride) {
+        if(Array.isArray(themeOverride.default)) {
+            override = themeOverride.default.find((v) => Object.keys(v).includes('color'))?.color || null
+        } else {
+            override = themeOverride.default && themeOverride.default.color ? themeOverride.default.color : null;
+        }
+    } else {
+        override = null;
+    }
+    return override ? override : (theme ? theme : 'black');
 }

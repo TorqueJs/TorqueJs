@@ -4,7 +4,7 @@ import { _TorqueButton } from './Button.Styles';
 import { StylesService } from '../../Torque/StylesService';
 import { ComponentStyles, ComponentType, ComponentStyling, ComponentAttributes } from '../../Types';
 import { GenerateGuid } from '../../Utils/GenerateGuid';
-import { IconProps, TorqueIcon } from '../../Icons/Icon.Component';
+import { getIconColor, getIconFontSize, IconProps, TorqueIcon } from '../../Icons/Icon.Component';
 
 interface TorqueButtonState {
     componentStyles: ComponentStyles;
@@ -61,24 +61,6 @@ export class TorqueButton extends React.Component<TorqueButtonProps, TorqueButto
         }
     }
 
-    getFontSize = () => {
-        let override = this.props.themeOverrides && 
-            this.props.themeOverrides.default && 
-            this.props.themeOverrides.default.fontSize ? this.props.themeOverrides.default.fontSize : null;
-        let theme = (this.state.componentAttributes.styles as ComponentStyling).default.fontSize ?
-            (this.state.componentAttributes.styles as ComponentStyling).default.fontSize : null;
-        return override ? override : (theme ? theme : '24');
-    }
-
-    getColor = () => {
-        let override = this.props.themeOverrides && 
-            this.props.themeOverrides.default && 
-            this.props.themeOverrides.default.color ? this.props.themeOverrides.default.color : null;
-        let theme = (this.state.componentAttributes.styles as ComponentStyling).default.color ?
-            (this.state.componentAttributes.styles as ComponentStyling).default.color : null;
-        return override ? override : (theme ? theme : 'black');
-    }
-
     render(): JSX.Element {
         return (
             <_TorqueButton 
@@ -87,7 +69,7 @@ export class TorqueButton extends React.Component<TorqueButtonProps, TorqueButto
                     this.props.onClick(value) 
                 } } 
                 theme={this.state.componentAttributes}
-                themeOverrides={ this.props.themeOverrides ? this.props.themeOverrides : {} }
+                themeOverride={ this.props.themeOverride ? this.props.themeOverride : {} }
                 data-name="torque-button"
                 ref={this.buttonRef} 
                 animation={this.props.animation ? this.props.animation : ''}
@@ -96,9 +78,9 @@ export class TorqueButton extends React.Component<TorqueButtonProps, TorqueButto
                     this.props.icon && this.props.iconPosition === 'left' ? 
                     <TorqueIcon { ...{ 
                         icon: this.props.icon, 
-                        fontSize: this.getFontSize(),
+                        fontSize: getIconFontSize(this.props.themeOverride, this.state.componentAttributes),
                         margin: '4px 10px 0 0',
-                        color: this.getColor()
+                        color: getIconColor(this.props.themeOverride, this.state.componentAttributes)
                     } as IconProps } css={{ marginRight: '8px' }} ></TorqueIcon> :
                     null
                 }
@@ -107,17 +89,17 @@ export class TorqueButton extends React.Component<TorqueButtonProps, TorqueButto
                     this.props.icon && this.props.iconPosition === 'right' ? 
                     <TorqueIcon { ...{ 
                         icon: this.props.icon, 
-                        fontSize: this.getFontSize(),
+                        fontSize: getIconFontSize(this.props.themeOverride, this.state.componentAttributes),
                         margin: '4px 0 0 10px',
-                        color: this.getColor()
+                        color: getIconColor(this.props.themeOverride, this.state.componentAttributes)
                     } as IconProps } ></TorqueIcon> :
                     (
                         this.props.icon && this.props.iconPosition === 'only' ?
                         <TorqueIcon { ...{ 
                             icon: this.props.icon, 
-                            fontSize: this.getFontSize(),
+                            fontSize: getIconFontSize(this.props.themeOverride, this.state.componentAttributes),
                             margin: '4px 0px 0 0px',
-                            color: this.getColor()
+                            color: getIconColor(this.props.themeOverride, this.state.componentAttributes)
                         } as IconProps } ></TorqueIcon> :
                         null
                     )

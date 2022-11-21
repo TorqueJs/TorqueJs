@@ -1,10 +1,18 @@
 import { ComponentStyles } from "../Types/ComponentStyles";
 import { DefaultThemes, Theme } from "../Types/Theme";
+import { defaultLoggingConfig, TorqueLogger, TorqueLogLevel } from "../Utils/Logger";
 import { StylesService } from "./StylesService";
 
 class _TorqueService {
 
-    setTheme(theme: DefaultThemes | Theme) {
+    setLogger(logPrefix = '', logConfig = defaultLoggingConfig) {
+        TorqueLogger.init(logPrefix, logConfig);
+    }
+
+    setTheme(theme: DefaultThemes | Theme, useDefaultLogger = true) {
+        if (useDefaultLogger) {
+            this.setLogger();
+        }
         StylesService.getInstance().init(theme);
     }
 

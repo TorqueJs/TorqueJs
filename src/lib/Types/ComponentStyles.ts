@@ -1,26 +1,28 @@
 export interface ComponentAttributes {
-    styles: ComponentStyling;
+    styles?: ComponentStyling;
     identifier?: string;
-    config?: TorqueButtonConfig;
+    config?: TorqueButtonConfig | TorqueBoxConfig;
 }
+
+export const ComponentAttributePossibilities = ['styles', 'accordianHeader', 'accordianWrapper', 'accordianContent'];
 
 export interface ComponentStyling {
     /**
      * represents the component styles on default state
      */
-    default: TorqueCSSObject;
-    focus?: TorqueCSSObject;
-    active?: TorqueCSSObject;
-    hover?: TorqueCSSObject;
-    before?: TorqueCSSObject;
-    after?: TorqueCSSObject;
-    firstChild?: TorqueCSSObject;
-    checked?: TorqueCSSObject;
-    disabled?: TorqueCSSObject;
-    invalid?: TorqueCSSObject;
-    firstOfType?: TorqueCSSObject;
-    lastChild?: TorqueCSSObject;
-    lastOfType?: TorqueCSSObject;
+    default: TorqueCSSObject | TorqueCSSObject[];
+    focus?: TorqueCSSObject | TorqueCSSObject[];
+    active?: TorqueCSSObject | TorqueCSSObject[];
+    hover?: TorqueCSSObject | TorqueCSSObject[];
+    before?: TorqueCSSObject | TorqueCSSObject[];
+    after?: TorqueCSSObject | TorqueCSSObject[];
+    firstChild?: TorqueCSSObject | TorqueCSSObject[];
+    checked?: TorqueCSSObject | TorqueCSSObject[];
+    disabled?: TorqueCSSObject | TorqueCSSObject[];
+    invalid?: TorqueCSSObject | TorqueCSSObject[];
+    firstOfType?: TorqueCSSObject | TorqueCSSObject[];
+    lastChild?: TorqueCSSObject | TorqueCSSObject[];
+    lastOfType?: TorqueCSSObject | TorqueCSSObject[];
 }
 
 export interface ComponentConfig {
@@ -30,10 +32,25 @@ export interface ComponentConfig {
 export interface TorqueButtonConfig extends ComponentConfig {
     animation?: 'none' | 'material-ripple' | 'highlight-text';
 }
-
-export interface TorqueCheckboxConfig extends ComponentConfig {
-
-}
+export interface TorqueBoxConfig extends ComponentConfig {}
+export interface TorqueCheckboxConfig extends ComponentConfig {}
+export interface TorqueAccordianConfig extends ComponentConfig {}
+export interface TorqueCardConfig extends ComponentConfig {}
+export interface TorqueDatepickerConfig extends ComponentConfig {}
+export interface TorqueDividerConfig extends ComponentConfig {}
+export interface TorqueInputConfig extends ComponentConfig {}
+export interface TorqueMenuConfig extends ComponentConfig {}
+export interface TorqueModalConfig extends ComponentConfig {}
+export interface TorqueProgressConfig extends ComponentConfig {}
+export interface TorqueRadioConfig extends ComponentConfig {}
+export interface TorqueSelectInputConfig extends ComponentConfig {}
+export interface TorqueSidenavConfig extends ComponentConfig {}
+export interface TorqueSlideToggleConfig extends ComponentConfig {}
+export interface TorqueSnackbarConfig extends ComponentConfig {}
+export interface TorqueSpinnerConfig extends ComponentConfig {}
+export interface TorqueTableConfig extends ComponentConfig {}
+export interface TorqueTabsConfig extends ComponentConfig {}
+export interface TorqueTooltipConfig extends ComponentConfig {}
 
 export interface ComponentStyles {
     component: ComponentType;
@@ -42,7 +59,25 @@ export interface ComponentStyles {
 
 export enum ComponentType {
     TORQUE_BUTTON = 'TORQUE_BUTTON',
-    TORQUE_CHECKBOX = 'TORQUE_CHECKBOX'
+    TORQUE_CHECKBOX = 'TORQUE_CHECKBOX',
+    TORQUE_BOX = 'TORQUE_BOX',
+    TORQUE_ACCORDIAN = 'TORQUE_ACCORDIAN',
+    TORQUE_CARD = 'TORQUE_CARD',
+    TORQUE_DATEPICKER = 'TORQUE_DATEPICKER',
+    TORQUE_DIVIDER = 'TORQUE_DIVIDER',
+    TORQUE_INPUT = 'TORQUE_INPUT',
+    TORQUE_MENU = 'TORQUE_MENU',
+    TORQUE_MODAL = 'TORQUE_MODAL',
+    TORQUE_PROGRESS = 'TORQUE_PROGRESS',
+    TORQUE_RADIO = 'TORQUE_RADIO',
+    TORQUE_SELECT_INPUT = 'TORQUE_SELECT_INPUT',
+    TORQUE_SIDENAV = 'TORQUE_SIDENAV',
+    TORQUE_SLIDE_TOGGLE = 'TORQUE_SLIDE_TOGGLE',
+    TORQUE_SNACKBAR = 'TORQUE_SNACKBAR',
+    TORQUE_SPINNER = 'TORQUE_SPINNER',
+    TORQUE_TABLE = 'TORQUE_TABLE',
+    TORQUE_TABS = 'TORQUE_TABS',
+    TORQUE_TOOLTIP = 'TORQUE_TOOLTIP'
 }
 
 type ColorNames = 'black'|'silver'|'gray'|'white'|'maroon'|'red'|'purple'|'fuchsia'|'green'|'lime'|'olive'|'yellow'|'navy'|'blue'|'teal'|'aqua'|'aliceblue'|'antiquewhite'|'aqua'|'aquamarine'|'azure'|'beige'|'bisque'|'black'|'blanchedalmond'|'blue'|'blueviolet'|'brown'|'burlywood'|'cadetblue'|'chartreuse'|'chocolate'|'coral'|'cornflowerblue'|'cornsilk'|'crimson'|'cyan'|'darkblue'|'darkcyan'|'darkgoldenrod'|'darkgray'|'darkgreen'|'darkgrey'|'darkkhaki'|'darkmagenta'|'darkolivegreen'|'darkorange'|'darkorchid'|'darkred'|'darksalmon'|'darkseagreen'|'darkslateblue'|'darkslategray'|'darkslategrey'|'darkturquoise'|'darkviolet'|'deeppink'|'deepskyblue'|'dimgray'|'dimgrey'|'dodgerblue'|'firebrick'|'floralwhite'|'forestgreen'|'fuchsia'|'gainsboro'|'ghostwhite'|'gold'|'goldenrod'|'gray'|'green'|'greenyellow'|'grey'|'honeydew'|'hotpink'|'indianred'|'indigo'|'ivory'|'khaki'|'lavender'|'lavenderblush'|'lawngreen'|'lemonchiffon'|'lightblue'|'lightcoral'|'lightcyan'|'lightgoldenrodyellow'|'lightgray'|'lightgreen'|'lightgrey'|'lightpink'|'lightsalmon'|'lightseagreen'|'lightskyblue'|'lightslategray'|'lightslategrey'|'lightsteelblue'|'lightyellow'|'lime'|'limegreen'|'linen'|'magenta'|'maroon'|'mediumaquamarine'|'mediumblue'|'mediumorchid'|'mediumpurple'|'mediumseagreen'|'mediumslateblue'|'mediumspringgreen'|'mediumturquoise'|'mediumvioletred'|'midnightblue'|'mintcream'|'mistyrose'|'moccasin'|'navajowhite'|'navy'|'oldlace'|'olive'|'olivedrab'|'orange'|'orangered'|'orchid'|'palegoldenrod'|'palegreen'|'paleturquoise'|'palevioletred'|'papayawhip'|'peachpuff'|'peru'|'pink'|'plum'|'powderblue'|'purple'|'red'|'rosybrown'|'royalblue'|'saddlebrown'|'salmon'|'sandybrown'|'seagreen'|'seashell'|'sienna'|'silver'|'skyblue'|'slateblue'|'slategray'|'slategrey'|'snow'|'springgreen'|'steelblue'|'tan'|'teal'|'thistle'|'tomato'|'turquoise'|'violet'|'wheat'|'white'|'whitesmoke'|'yellow'|'yellowgreen';

@@ -77,5 +77,79 @@ export const CeruleanTheme: Theme = {
                 animation: 'material-ripple'
             }
         }
-    ]
+    ],
+    TORQUE_BOX: [
+        {
+            identifier: 'flex-column',
+            styles: {
+                default: [
+                    {
+                        width: '100%',
+                        height: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                    },
+                    {
+                        width: '-webkit-fill-available',
+                        height: '-webkit-fill-available'
+                    },
+                    {
+                        width: '-moz-fill-available',
+                        height: '-moz-fill-available'
+                    }
+                ]
+            }
+        },
+        {
+            identifier: 'flex-row',
+            styles: {
+                default: [
+                    {
+                        width: '100%',
+                        height: '100%',
+                        display: 'flex',
+                        flexDirection: 'row'
+                    },
+                    {
+                        width: '-webkit-fill-available',
+                        height: '-webkit-fill-available'
+                    },
+                    {
+                        width: '-moz-fill-available',
+                        height: '-moz-fill-available'
+                    }
+                ]
+            }
+        }
+    ],
+    TORQUE_ACCORDIAN: {
+        identifier: 'default',
+        accordianWrapper: {
+            styles: {
+                default: {
+                    width: '100%',
+                    height: '100%',
+                    minHeight: '40px'
+                }
+            }
+        },
+        accordianHeader: {
+            styles: {
+                default: {
+                    width: '100%',
+                    height: '40px',
+                    background: 'green'
+                }
+            }
+        },
+        accordianContent: {
+            styles: {
+                default: {
+                    width: '100%',
+                    height: '40px',
+                    background: 'blue'
+                }
+            }
+        }
+    }
 }

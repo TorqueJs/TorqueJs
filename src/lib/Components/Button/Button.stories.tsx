@@ -4,6 +4,7 @@ import { ComponentStory } from '@storybook/react';
 import { TorqueService } from '../../Torque';
 import { DefaultThemes } from '../../Types/Theme';
 import { TorqueButtonProps } from './Button.Types';
+import { TorqueLogger, TorqueLogLevel } from '../../Utils/Logger';
 
 const Icons = [
     '3drotation',
@@ -1491,7 +1492,7 @@ export default {
                 type: 'text'
             }
         },
-        themeOverrides: {
+        themeOverride: {
             name: 'Theme Overrides',
             description: 'CSS Object properties to be replaced for this instance of the Torque Button',
             control: {
@@ -1537,21 +1538,25 @@ export default {
         iconPosition: 'right',
         animation: 'material-ripple',
         identifier: 'basic',
-        themeOverrides: {},
+        themeOverride: {},
     } as TorqueButtonProps
 }
 
 
 const Button: ComponentStory<typeof TorqueButton> = (args: TorqueButtonProps) => {
     TorqueService.setTheme(DefaultThemes.CERULEAN);
+    TorqueLogger.log('Loading Torque Basic Button', TorqueLogLevel.WARN);
     return (
-        <TorqueButton {...args} />
+        <TorqueButton 
+            {...args}
+            onClick={() => TorqueLogger.log('Clicked Torque Button Basic', TorqueLogLevel.INFO)} />
     );
 };
 export const _TorqueButtonBasic = Button.bind({});
 
 const ButtonIcon: ComponentStory<typeof TorqueButton> = (args: TorqueButtonProps) => {
     TorqueService.setTheme(DefaultThemes.CERULEAN);
+    TorqueLogger.log('Loading Torque Button Icon', TorqueLogLevel.WARN);
     return (
         <TorqueButton 
             {...args} 
@@ -1559,7 +1564,8 @@ const ButtonIcon: ComponentStory<typeof TorqueButton> = (args: TorqueButtonProps
             icon='360'
             iconPosition='only'
             animation='material-ripple'
-            identifier='icon-only' />
+            identifier='icon-only' 
+            onClick={() => TorqueLogger.log('Clicked Torque Button Icon', TorqueLogLevel.INFO)} />
     );
 };
 export const _TorqueButtonIcon = ButtonIcon.bind({});
@@ -1567,8 +1573,12 @@ export const _TorqueButtonIcon = ButtonIcon.bind({});
 
 const ButtonOverride: ComponentStory<typeof TorqueButton> = (args: TorqueButtonProps) => {
     TorqueService.setTheme(DefaultThemes.CERULEAN);
+    TorqueLogger.log('Loading Torque Button Override', TorqueLogLevel.WARN);
     return (
-        <TorqueButton {...args} themeOverrides={{ default: { color: 'black', background: 'pink' } }} />
+        <TorqueButton 
+            {...args} 
+            themeOverride={{ default: { color: 'black', background: 'pink' } }} 
+            onClick={() => TorqueLogger.log('Clicked Torque Button Flex Row', TorqueLogLevel.INFO)} />
     );
 };
 export const _TorqueButtonOverride = ButtonOverride.bind({});
@@ -1576,9 +1586,12 @@ export const _TorqueButtonOverride = ButtonOverride.bind({});
 
 const ButtonFlexColumn: ComponentStory<typeof TorqueButton> = (args: TorqueButtonProps) => {
     TorqueService.setTheme(DefaultThemes.CERULEAN);
+    TorqueLogger.log('Loading Torque Button Flex Column', TorqueLogLevel.WARN);
     return (
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
-            <TorqueButton {...args} />
+            <TorqueButton 
+                {...args} 
+                onClick={() => TorqueLogger.log('Clicked Torque Button Flex Column', TorqueLogLevel.INFO)} />
         </div>
     );
 }
@@ -1586,9 +1599,12 @@ export const _TorqueButtonFlexColumn = ButtonFlexColumn.bind({})
 
 const ButtonFlexRow: ComponentStory<typeof TorqueButton> = (args: TorqueButtonProps) => {
     TorqueService.setTheme(DefaultThemes.CERULEAN);
+    TorqueLogger.log('Loading Torque Button Flex Row', TorqueLogLevel.WARN);
     return (
         <div style={{ width: '100%', display: 'flex', flexDirection: 'row' }}>
-            <TorqueButton {...args} />
+            <TorqueButton 
+                {...args} 
+                onClick={() => TorqueLogger.log('Clicked Torque Button Flex Row', TorqueLogLevel.INFO)} />
         </div>
     );
 }
