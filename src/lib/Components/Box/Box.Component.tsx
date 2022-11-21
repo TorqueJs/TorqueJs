@@ -1,17 +1,16 @@
 import React, { RefObject } from 'react';
 import { StylesService } from '../../Torque/StylesService';
 import { ComponentAttributes, ComponentStyles, ComponentType } from '../../Types';
-import { GenerateGuid } from '../../Utils/GenerateGuid';
+import { WithBehaviorSubject } from '../../Utils/WithBehaviorSubject';
 import { _TorqueBox } from './Box.Styles';
 import { TorqueBoxProps } from './Box.Types';
 
 interface TorqueBoxState {
     componentStyles: ComponentStyles;
-    subscriptionGuid: string;
     componentAttributes: ComponentAttributes
 }
 
-export class TorqueBox extends React.Component<TorqueBoxProps, TorqueBoxState> {
+class TorqueBoxComponent extends React.Component<TorqueBoxProps, TorqueBoxState> {
 
     boxRef: RefObject<HTMLDivElement> = React.createRef();
 
@@ -20,22 +19,18 @@ export class TorqueBox extends React.Component<TorqueBoxProps, TorqueBoxState> {
         let componentStyles = StylesService.getInstance().getComponentStyle(ComponentType.TORQUE_BOX);
         this.state = {
             componentStyles: componentStyles,
-            subscriptionGuid: GenerateGuid(),
             componentAttributes: StylesService.getInstance().getAttributesByIdentifier(componentStyles, this.props.identifier || 0)
         }
     }
 
-    componentDidMount(): void {
-        StylesService.getInstance().torqueBoxSubject.subscribe(this.state.subscriptionGuid, (value: ComponentStyles) => {
+    componentDidUpdate(): void {
+        if (this.props.subjectUpdated) {
+            this.props.subjectDataUsed();
             this.setState({
-                componentStyles: value,
-                componentAttributes: StylesService.getInstance().getAttributesByIdentifier(value, this.props.identifier || 0)
-            })
-        });
-    }
-
-    componentWillUnmount(): void {
-        StylesService.getInstance().torqueBoxSubject.unsubscribe(this.state.subscriptionGuid);
+                componentStyles: this.props.subjectData,
+                componentAttributes: StylesService.getInstance().getAttributesByIdentifier(this.props.subjectData, this.props.identifier || 0)
+            });
+        }
     }
 
     render(): JSX.Element {
@@ -56,3 +51,5 @@ export class TorqueBox extends React.Component<TorqueBoxProps, TorqueBoxState> {
         )
     }
 }
+
+export const TorqueBox = WithBehaviorSubject(TorqueBoxComponent, StylesService.getInstance().torqueBoxSubject);

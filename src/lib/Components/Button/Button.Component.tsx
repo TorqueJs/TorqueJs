@@ -3,16 +3,15 @@ import { TorqueButtonProps } from './Button.Types';
 import { _TorqueButton } from './Button.Styles';
 import { StylesService } from '../../Torque/StylesService';
 import { ComponentStyles, ComponentType, ComponentStyling, ComponentAttributes } from '../../Types';
-import { GenerateGuid } from '../../Utils/GenerateGuid';
 import { getIconColor, getIconFontSize, IconProps, TorqueIcon } from '../../Icons/Icon.Component';
+import { WithBehaviorSubject } from '../../Utils/WithBehaviorSubject';
 
 interface TorqueButtonState {
     componentStyles: ComponentStyles;
-    subscriptionGuid: string;
     componentAttributes: ComponentAttributes;
 }
 
-export class TorqueButton extends React.Component<TorqueButtonProps, TorqueButtonState> {
+class TorqueButtonComponent extends React.Component<TorqueButtonProps, TorqueButtonState> {
 
     buttonRef: RefObject<HTMLButtonElement> = React.createRef();
 
@@ -21,22 +20,18 @@ export class TorqueButton extends React.Component<TorqueButtonProps, TorqueButto
         let componentStyles = StylesService.getInstance().getComponentStyle(ComponentType.TORQUE_BUTTON);
         this.state = {
             componentStyles: componentStyles,
-            subscriptionGuid: GenerateGuid(),
             componentAttributes: StylesService.getInstance().getAttributesByIdentifier(componentStyles, this.props.identifier || 0)
         };
     }
 
-    componentDidMount(): void {
-        StylesService.getInstance().torqueButtonSubject.subscribe(this.state.subscriptionGuid, (value: ComponentStyles) => {
+    componentDidUpdate(): void {
+        if (this.props.subjectUpdated) {
+            this.props.subjectDataUsed();
             this.setState({
-                componentStyles: value,
-                componentAttributes: StylesService.getInstance().getAttributesByIdentifier(value, this.props.identifier || 0)
+                componentStyles: this.props.subjectData,
+                componentAttributes: StylesService.getInstance().getAttributesByIdentifier(this.props.subjectData, this.props.identifier || 0)
             });
-        });
-    }
-
-    componentWillUnmount(): void {
-        StylesService.getInstance().torqueButtonSubject.unsubscribe(this.state.subscriptionGuid);
+        }
     }
 
     clicked = (event: MouseEvent): void => {
@@ -108,3 +103,5 @@ export class TorqueButton extends React.Component<TorqueButtonProps, TorqueButto
         );
     }
 }
+
+export const TorqueButton = WithBehaviorSubject(TorqueButtonComponent, StylesService.getInstance().torqueButtonSubject);

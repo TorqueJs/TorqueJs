@@ -1,6 +1,7 @@
-import { ComponentStyling, TorqueOnClickEvent } from "../../Types";
+import { ComponentStyles, ComponentStyling, TorqueOnClickEvent } from "../../Types";
+import { IWithBehaviorSubject } from "../../Utils/WithBehaviorSubject";
 
-export interface TorqueButtonProps {
+export interface TorqueButtonProps extends IWithBehaviorSubject<ComponentStyles> {
     onClick: TorqueOnClickEvent;
     text?: string;
     themeOverride?: ComponentStyling;
