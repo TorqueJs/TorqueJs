@@ -5,7 +5,7 @@ export const WaterfallChart = (props: IconProps) => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" height={`${props.fontSize ? props.fontSize : 24}`} viewBox={`0 0 24 24`} width={`${props.fontSize ? props.fontSize : 24}`}>
             <path d="M0 0h24v24H0z" fill="none"/>
-            <path fill={`${props.color}`} d="M18 4h3v16h-3zM3 13h3v7H3zm11-9h3v3h-3zm-4 1h3v4h-3zm-3 5h3v4H7z"/>
+            <path fill={`${props.color ? props.color : 'black'}`} d="M18 4h3v16h-3zM3 13h3v7H3zm11-9h3v3h-3zm-4 1h3v4h-3zm-3 5h3v4H7z"/>
         </svg>
     )
 }

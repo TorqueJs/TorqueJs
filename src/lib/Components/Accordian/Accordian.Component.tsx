@@ -4,8 +4,6 @@ import { ComponentType, ComponentAttributes, ComponentStyles } from '../../Types
 import { WithBehaviorSubject } from '../../Utils/WithBehaviorSubject';
 import { _TorqueAccordianWrapper } from './Accordian.Styles';
 import { TorqueAccordianProps } from './Accordian.Types';
-import { TorqueAccordianContent } from './AccordianContent.Component';
-import { TorqueAccordianHeader } from './AccordianHeader.Component';
 
 interface TorqueAccordianState {
     componentStyles: ComponentStyles;
@@ -13,9 +11,6 @@ interface TorqueAccordianState {
 }
 
 class TorqueAccordianComponent extends React.Component<TorqueAccordianProps, TorqueAccordianState> {
-
-    public static Header = TorqueAccordianHeader;
-    public static Content = TorqueAccordianContent;
 
     constructor(props: TorqueAccordianProps) {
         super(props);
@@ -42,6 +37,7 @@ class TorqueAccordianComponent extends React.Component<TorqueAccordianProps, Tor
                 theme={this.state.componentAttributes}
                 themeOverrides={this.props.themeOverride ? this.props.themeOverride : {}}
                 data-name="torque-accordian-wrapper"
+                data-active={ this.props.isActive ? 'active' : 'inactive' }
                 >
                 { this.props.children }
             </_TorqueAccordianWrapper>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StylesService } from '../../Torque/StylesService';
 import { ComponentStyles, ComponentType } from '../../Types';
 import { GenerateGuid } from '../../Utils/GenerateGuid';
@@ -7,6 +7,7 @@ import { TorqueAccordianHeaderProps } from './Accordian.Types';
 
 
 export const TorqueAccordianHeader: React.FC<TorqueAccordianHeaderProps> = (props: TorqueAccordianHeaderProps) => {
+    let [active, setActivity] = useState(false);
     let componentStyles = StylesService.getInstance().getComponentStyle(ComponentType.TORQUE_ACCORDIAN);
     let subscriptionGuid = GenerateGuid();
     let componentAttributes = StylesService.getInstance().getAttributesByIdentifier(componentStyles, props.identifier || ComponentType.TORQUE_ACCORDIAN);
@@ -27,6 +28,11 @@ export const TorqueAccordianHeader: React.FC<TorqueAccordianHeaderProps> = (prop
             theme={componentAttributes}
             themeOverrides={props.themeOverride ? props.themeOverride : {}}
             data-name="torque-accordian-header"
+            data-active={ active ? 'active' : 'inactive' }
+            onClick={ () => {
+                if (props.onClick) props.onClick(null);
+                setActivity(!active);
+            } }
             >
             { props.children }
         </_TorqueAccordianHeader>

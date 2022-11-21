@@ -129,7 +129,29 @@ export const CeruleanTheme: Theme = {
                 default: {
                     width: '100%',
                     height: '100%',
-                    minHeight: '40px'
+                    minHeight: '40px',
+                    boxShadow: 'none',
+                    margin: 'none',
+                    position: 'relative',
+                    '&::after': {
+                        content: '""',
+                        position: 'absolute',
+                        width: '100%',
+                        height: '100%',
+                        top: '0',
+                        left: '0',
+                        zIndex: '-1',
+                        opacity: '0',
+                        boxShadow: '-2px -2px 7px rgba(0,0,0,0.2)',
+                        transition: 'opacity 0.2s ease-out'
+                    },
+                    '&:not([data-active="inactive"])::after': {
+                        opacity: '1',
+                    },
+                    '&[data-active="active"]': {
+                        margin: '12px 0px'
+                    },
+                    transition: 'margin 0.2s ease-out'
                 }
             }
         },
@@ -138,7 +160,14 @@ export const CeruleanTheme: Theme = {
                 default: {
                     width: '100%',
                     height: '40px',
-                    background: 'green'
+                    background: 'rgba(0,0,0,0.05)',
+                    '&[data-active="active"]': {
+                        background: 'white'
+                    },
+                    '&:hover': {
+                        background: 'white'
+                    },
+                    transition: 'background 0.2s ease-out'
                 }
             }
         },
@@ -147,7 +176,7 @@ export const CeruleanTheme: Theme = {
                 default: {
                     width: '100%',
                     height: '40px',
-                    background: 'blue'
+                    background: 'rgba(0,0,0,0.2)'
                 }
             }
         }

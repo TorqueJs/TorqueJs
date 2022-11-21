@@ -13,7 +13,7 @@ export interface IWithBehaviorSubject<T,> {
 }
 
 function getDisplayName(WrappedComponent: any) {
-    return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+    return WrappedComponent?.displayName || WrappedComponent?.name || 'Component';
 }
 
 interface State<T> { subjectData: T, subscriptionGuid: string, subscriptionChanged: boolean };
@@ -71,7 +71,6 @@ export const WithBehaviorSubject = function<
             )
         }
     }
-
     (HOCWithBehaviorSubject as any).displayName = `WithBehaviorSubject${getDisplayName(ChildComponent)}`;
     return (HOCWithBehaviorSubject as any) as R;
 }

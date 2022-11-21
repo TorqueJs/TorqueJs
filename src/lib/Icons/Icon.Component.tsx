@@ -2925,9 +2925,9 @@ export type Icons = '3drotation' |
 
 export interface IconProps {
     icon: Icons;
-    fontSize: string;
-    margin: string;
-    color: string;
+    fontSize?: string;
+    margin?: string;
+    color?: string;
 }
 
 const GetIcon = (props: IconProps): JSX.Element => {
@@ -4396,7 +4396,7 @@ const GetIcon = (props: IconProps): JSX.Element => {
 
 export const TorqueIcon = (props: IconProps): JSX.Element => {
     return(
-        <div style={{ margin: props.margin }} className={'torque-button-icon'}>
+        <div style={{ margin: props.margin || '0px' }} className={'torque-button-icon'}>
             { GetIcon(props) }
         </div>
     )
@@ -4404,10 +4404,10 @@ export const TorqueIcon = (props: IconProps): JSX.Element => {
 
 export const getIconFontSize = (themeOverride: ComponentStyling | undefined, componentAttributes: ComponentAttributes) => {
     let theme; let override;
-    if (Array.isArray(componentAttributes.styles.default)) {
-        theme = componentAttributes.styles.default.find((v) => Object.keys(v).includes('fontSize'))?.fontSize || null
+    if (Array.isArray(componentAttributes.styles?.default)) {
+        theme = componentAttributes.styles?.default.find((v) => Object.keys(v).includes('fontSize'))?.fontSize || null
     } else {
-        theme = componentAttributes.styles.default.fontSize ? componentAttributes.styles.default.fontSize : null;
+        theme = componentAttributes.styles?.default.fontSize ? componentAttributes.styles.default.fontSize : null;
     }
 
     if (themeOverride) {
@@ -4425,10 +4425,10 @@ export const getIconFontSize = (themeOverride: ComponentStyling | undefined, com
 
 export const getIconColor = (themeOverride: ComponentStyling | undefined, componentAttributes: ComponentAttributes) => {
     let theme; let override;
-    if (Array.isArray(componentAttributes.styles.default)) {
-        theme = componentAttributes.styles.default.find((v) => Object.keys(v).includes('color'))?.color || null
+    if (Array.isArray(componentAttributes.styles?.default)) {
+        theme = componentAttributes.styles?.default.find((v) => Object.keys(v).includes('color'))?.color || null
     } else {
-        theme = componentAttributes.styles.default.color ? componentAttributes.styles.default.color : null;
+        theme = componentAttributes.styles?.default.color ? componentAttributes.styles.default.color : null;
     }
 
     if (themeOverride) {

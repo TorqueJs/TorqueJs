@@ -26,6 +26,7 @@ export const TorqueAccordianContent: React.FC<TorqueAccordianContentProps> = (pr
             theme={componentAttributes}
             themeOverrides={ props.themeOverride ? props.themeOverride : {} }
             data-name="torque-accordian-content"
+            data-active={ props.isActive ? 'active' : 'inactive' }
             >
             { props.children }
         </_TorqueAccordianContent>

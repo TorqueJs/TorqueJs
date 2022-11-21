@@ -4,6 +4,7 @@ import { IWithBehaviorSubject } from "../../Utils/WithBehaviorSubject";
 export interface TorqueAccordianProps extends IWithBehaviorSubject<ComponentStyles> {
   identifier?: string;
   themeOverride?: ComponentStyling;
+  isActive?: boolean;
 }
 
 export interface TorqueAccordianHeaderProps {
@@ -17,4 +18,5 @@ export interface TorqueAccordianContentProps {
   identifier?: string;
   themeOverride?: ComponentStyling;
   children?: any;
+  isActive?: boolean;
 }

@@ -10,11 +10,11 @@ export const AccountBalance = (props: IconProps) => {
             </g>
             <g>
                 <g>
-                    <rect fill={`${props.color}`} height="7" width="3" x="4" y="10"/>
-                    <rect fill={`${props.color}`} height="7" width="3" x="10.5" y="10"/>
-                    <rect fill={`${props.color}`} height="3" width="20" x="2" y="19"/>
-                    <rect fill={`${props.color}`} height="7" width="3" x="17" y="10"/>
-                    <polygon fill={`${props.color}`} points="12,1 2,6 2,8 22,8 22,6"/>
+                    <rect fill={`${props.color ? props.color : 'black'}`} height="7" width="3" x="4" y="10"/>
+                    <rect fill={`${props.color ? props.color : 'black'}`} height="7" width="3" x="10.5" y="10"/>
+                    <rect fill={`${props.color ? props.color : 'black'}`} height="3" width="20" x="2" y="19"/>
+                    <rect fill={`${props.color ? props.color : 'black'}`} height="7" width="3" x="17" y="10"/>
+                    <polygon fill={`${props.color ? props.color : 'black'}`} points="12,1 2,6 2,8 22,8 22,6"/>
                 </g>
             </g>
         </svg>
