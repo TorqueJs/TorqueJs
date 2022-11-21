@@ -76,7 +76,7 @@ export const CeruleanTheme: Theme = {
             config: {
                 animation: 'material-ripple'
             }
-        }
+        },
     ],
     TORQUE_BOX: [
         {
@@ -158,14 +158,24 @@ export const CeruleanTheme: Theme = {
         accordianHeader: {
             styles: {
                 default: {
-                    width: '100%',
-                    height: '40px',
+                    width: 'calc(100% - 16px)',
+                    height: '24px',
                     background: 'rgba(0,0,0,0.05)',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    padding: '8px',
                     '&[data-active="active"]': {
-                        background: 'white'
+                        background: 'white',
+                        borderBottom: '1px solid rgba(0,0,0,0.1)'
                     },
                     '&:hover': {
                         background: 'white'
+                    },
+                    '& p': {
+                        fontWeight: 'bold',
+                        fontSize: '18px',
+                        margin: '0',
+                        padding: '0'
                     },
                     transition: 'background 0.2s ease-out'
                 }
@@ -174,9 +184,17 @@ export const CeruleanTheme: Theme = {
         accordianContent: {
             styles: {
                 default: {
-                    width: '100%',
-                    height: '40px',
-                    background: 'rgba(0,0,0,0.2)'
+                    width: 'calc(100% - 16px)',
+                    height: '0px',
+                    padding: '8px',
+                    '&[data-active="active"]': {
+                        height: '100px',
+                    },
+                    '&[data-active="inactive"]': {
+                        visibility: 'hidden',
+                        padding: '0px',
+                    },
+                    transition: 'height 0.2s ease-out',
                 }
             }
         }

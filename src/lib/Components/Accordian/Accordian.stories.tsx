@@ -24,6 +24,7 @@ const Accordian: ComponentStory<typeof TorqueAccordian> = (args: TorqueAccordian
     const [clickedFirst, setClickedFirst] = useState(false);
     const [clickedSecond, setClickedSecond] = useState(false);
     const [clickedThird, setClickedThird] = useState(false);
+    const [clickedFourth, setClickedFourth] = useState(false);
     TorqueService.setTheme(DefaultThemes.CERULEAN);
     TorqueLogger.log('Loading Torque Accordian', TorqueLogLevel.WARN);
     return (
@@ -33,26 +34,44 @@ const Accordian: ComponentStory<typeof TorqueAccordian> = (args: TorqueAccordian
                     setClickedFirst(!clickedFirst);
                 } }>
                     { clickedFirst ? <TorqueIcon icon='arrow_drop_down'></TorqueIcon> : <TorqueIcon icon='arrow_right'></TorqueIcon>}
+                    <p>First Item</p>
                 </TorqueAccordianHeader>
-                <TorqueAccordianContent isActive={ clickedFirst } ></TorqueAccordianContent>
+                <TorqueAccordianContent isActive={ clickedFirst } >
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex rerum est, molestias corporis placeat laudantium enim debitis, eius illo eligendi ipsam. Explicabo nihil, aspernatur provident eveniet necessitatibus reprehenderit culpa error.
+                </TorqueAccordianContent>
             </TorqueAccordian>
 
             <TorqueAccordian isActive={ clickedSecond }  {...args}>
                 <TorqueAccordianHeader onClick={ () => {
                     setClickedSecond(!clickedSecond);
                 } }>
-                    { clickedSecond ? <TorqueIcon icon='arrow_drop_down'></TorqueIcon> : <TorqueIcon icon='arrow_right'></TorqueIcon>}
+                    { clickedSecond ? <TorqueIcon icon='arrow_drop_down'></TorqueIcon> : <TorqueIcon icon='arrow_right'></TorqueIcon>}: Second Item
                 </TorqueAccordianHeader>
-                <TorqueAccordianContent isActive={ clickedSecond } ></TorqueAccordianContent>
+                <TorqueAccordianContent isActive={ clickedSecond } >
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis at inventore laboriosam esse cupiditate ab aliquid sapiente minus rem numquam sequi sunt, necessitatibus, doloribus dolorem nemo iure, porro blanditiis officia!
+                </TorqueAccordianContent>
             </TorqueAccordian>
 
             <TorqueAccordian isActive={ clickedThird }  {...args}>
                 <TorqueAccordianHeader onClick={ () => {
                     setClickedThird(!clickedThird);
                 } }>
-                    { clickedThird ? <TorqueIcon icon='arrow_drop_down'></TorqueIcon> : <TorqueIcon icon='arrow_right'></TorqueIcon>}
+                    { clickedThird ? <TorqueIcon icon='arrow_drop_down'></TorqueIcon> : <TorqueIcon icon='arrow_right'></TorqueIcon>}: Third Item
                 </TorqueAccordianHeader>
-                <TorqueAccordianContent isActive={ clickedThird } ></TorqueAccordianContent>
+                <TorqueAccordianContent isActive={ clickedThird } >
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus ad sunt odit, tempora consequuntur quo repellendus in aperiam nobis ex libero quae repellat ipsam voluptatum dolores quidem aspernatur a fugiat?
+                </TorqueAccordianContent>
+            </TorqueAccordian>
+
+            <TorqueAccordian isActive={ clickedFourth }  {...args}>
+                <TorqueAccordianHeader onClick={ () => {
+                    setClickedFourth(!clickedFourth);
+                } }>
+                    { clickedFourth ? <TorqueIcon icon='arrow_drop_down'></TorqueIcon> : <TorqueIcon icon='arrow_right'></TorqueIcon>}: Third Item
+                </TorqueAccordianHeader>
+                <TorqueAccordianContent isActive={ clickedFourth } >
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus ad sunt odit, tempora consequuntur quo repellendus in aperiam nobis ex libero quae repellat ipsam voluptatum dolores quidem aspernatur a fugiat?
+                </TorqueAccordianContent>
             </TorqueAccordian>
 
         </div>
