@@ -29,7 +29,7 @@ const Accordian: ComponentStory<typeof TorqueAccordian> = (args: TorqueAccordian
     TorqueLogger.log('Loading Torque Accordian', TorqueLogLevel.WARN);
     return (
         <div>
-            <TorqueAccordian isActive={ clickedFirst }  {...args}>
+            <TorqueAccordian identifier='default' isActive={ clickedFirst }  {...args}>
                 <TorqueAccordianHeader onClick={ () => {
                     setClickedFirst(!clickedFirst);
                 } }>
@@ -41,7 +41,7 @@ const Accordian: ComponentStory<typeof TorqueAccordian> = (args: TorqueAccordian
                 </TorqueAccordianContent>
             </TorqueAccordian>
 
-            <TorqueAccordian isActive={ clickedSecond }  {...args}>
+            <TorqueAccordian identifier='default' isActive={ clickedSecond }  {...args}>
                 <TorqueAccordianHeader onClick={ () => {
                     setClickedSecond(!clickedSecond);
                 } }>
@@ -52,7 +52,7 @@ const Accordian: ComponentStory<typeof TorqueAccordian> = (args: TorqueAccordian
                 </TorqueAccordianContent>
             </TorqueAccordian>
 
-            <TorqueAccordian isActive={ clickedThird }  {...args}>
+            <TorqueAccordian identifier='default' isActive={ clickedThird }  {...args}>
                 <TorqueAccordianHeader onClick={ () => {
                     setClickedThird(!clickedThird);
                 } }>
@@ -63,7 +63,7 @@ const Accordian: ComponentStory<typeof TorqueAccordian> = (args: TorqueAccordian
                 </TorqueAccordianContent>
             </TorqueAccordian>
 
-            <TorqueAccordian isActive={ clickedFourth }  {...args}>
+            <TorqueAccordian identifier='default' isActive={ clickedFourth }  {...args}>
                 <TorqueAccordianHeader onClick={ () => {
                     setClickedFourth(!clickedFourth);
                 } }>
