@@ -180,5 +180,12 @@ export const CeruleanTheme: Theme = {
                 }
             }
         }
+    },
+    TORQUE_CHECKBOX: {
+        styles: {
+            default: {
+
+            }
+        }
     }
 }

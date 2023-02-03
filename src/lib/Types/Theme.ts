@@ -60,7 +60,7 @@ export interface TorqueButtonAttributes extends ComponentAttributes {
 
 export interface TorqueCheckboxAttributes extends ComponentAttributes {
     styles: ComponentStyling;
-    config: TorqueCheckboxConfig;
+    config?: TorqueCheckboxConfig;
 }
 
 export interface TorqueBoxAttributes extends ComponentAttributes {
