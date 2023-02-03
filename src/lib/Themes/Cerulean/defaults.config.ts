@@ -76,7 +76,7 @@ export const CeruleanTheme: Theme = {
             config: {
                 animation: 'material-ripple'
             }
-        }
+        },
     ],
     TORQUE_BOX: [
         {
@@ -122,70 +122,92 @@ export const CeruleanTheme: Theme = {
             }
         }
     ],
-    TORQUE_ACCORDIAN: {
-        identifier: 'default',
-        accordianWrapper: {
-            styles: {
-                default: {
-                    width: '100%',
-                    height: '100%',
-                    minHeight: '40px',
-                    boxShadow: 'none',
-                    margin: 'none',
-                    position: 'relative',
-                    '&::after': {
-                        content: '""',
-                        position: 'absolute',
+    TORQUE_ACCORDIAN: [
+        {
+            identifier: 'default',
+            accordianWrapper: {
+                styles: {
+                    default: {
                         width: '100%',
                         height: '100%',
-                        top: '0',
-                        left: '0',
-                        zIndex: '-1',
-                        opacity: '0',
-                        boxShadow: '-2px -2px 7px rgba(0,0,0,0.2)',
-                        transition: 'opacity 0.2s ease-out'
-                    },
-                    '&:not([data-active="inactive"])::after': {
-                        opacity: '1',
-                    },
-                    '&[data-active="active"]': {
-                        margin: '12px 0px'
-                    },
-                    transition: 'margin 0.2s ease-out'
+                        minHeight: '40px',
+                        boxShadow: 'none',
+                        margin: 'none',
+                        position: 'relative',
+                        '&::after': {
+                            content: '""',
+                            position: 'absolute',
+                            width: '100%',
+                            height: '100%',
+                            top: '0',
+                            left: '0',
+                            zIndex: '-1',
+                            opacity: '0',
+                            boxShadow: '-2px -2px 7px rgba(0,0,0,0.2)',
+                            transition: 'opacity 0.2s ease-out'
+                        },
+                        '&:not([data-active="inactive"])::after': {
+                            opacity: '1',
+                        },
+                        '&[data-active="active"]': {
+                            margin: '12px 0px'
+                        },
+                        transition: 'margin 0.2s ease-out'
+                    }
                 }
-            }
-        },
-        accordianHeader: {
-            styles: {
-                default: {
-                    width: '100%',
-                    height: '40px',
-                    background: 'rgba(0,0,0,0.05)',
-                    '&[data-active="active"]': {
-                        background: 'white'
-                    },
-                    '&:hover': {
-                        background: 'white'
-                    },
-                    transition: 'background 0.2s ease-out'
+            },
+            accordianHeader: {
+                styles: {
+                    default: {
+                        width: 'calc(100% - 16px)',
+                        height: '24px',
+                        background: 'rgba(0,0,0,0.05)',
+                        display: 'flex',
+                        flexDirection: 'row',
+                        padding: '8px',
+                        '&[data-active="active"]': {
+                            background: 'white',
+                            borderBottom: '1px solid rgba(0,0,0,0.1)'
+                        },
+                        '&:hover': {
+                            background: 'white'
+                        },
+                        '& p': {
+                            fontWeight: 'bold',
+                            fontSize: '18px',
+                            margin: '0',
+                            padding: '0'
+                        },
+                        transition: 'background 0.2s ease-out'
+                    }
                 }
-            }
-        },
-        accordianContent: {
-            styles: {
-                default: {
-                    width: '100%',
-                    height: '40px',
-                    background: 'rgba(0,0,0,0.2)'
+            },
+            accordianContent: {
+                styles: {
+                    default: {
+                        width: 'calc(100% - 16px)',
+                        height: '0px',
+                        padding: '8px',
+                        '&[data-active="active"]': {
+                            height: '100px',
+                        },
+                        '&[data-active="inactive"]': {
+                            visibility: 'hidden',
+                            padding: '0px',
+                        },
+                        transition: 'height 0.2s ease-out',
+                    }
                 }
             }
         }
-    },
+    ],
     TORQUE_CHECKBOX: {
         styles: {
             default: {
 
             }
         }
-    }
+    },
+    TORQUE_SELECT_INPUT: [
+    ]
 }

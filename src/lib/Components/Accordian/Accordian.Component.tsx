@@ -24,6 +24,7 @@ class TorqueAccordianComponent extends React.Component<TorqueAccordianProps, Tor
     componentDidUpdate(): void {
         if (this.props.subjectUpdated) {
             this.props.subjectDataUsed();
+            console.log(this.props.subjectData);
             this.setState({
                 componentStyles: this.props.subjectData,
                 componentAttributes: StylesService.getInstance().getAttributesByIdentifier(this.props.subjectData, this.props.identifier || ComponentType.TORQUE_ACCORDIAN)

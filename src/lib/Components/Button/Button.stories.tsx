@@ -1591,7 +1591,6 @@ const ButtonFlexColumn: ComponentStory<typeof TorqueButton> = (args: TorqueButto
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
             <TorqueButton 
                 {...args} 
-                
                 onClick={() => TorqueLogger.log('Clicked Torque Button Flex Column', TorqueLogLevel.INFO)} />
         </div>
     );
@@ -1605,7 +1604,6 @@ const ButtonFlexRow: ComponentStory<typeof TorqueButton> = (args: TorqueButtonPr
         <div style={{ width: '100%', display: 'flex', flexDirection: 'row' }}>
             <TorqueButton 
                 {...args} 
-                
                 onClick={() => TorqueLogger.log('Clicked Torque Button Flex Row', TorqueLogLevel.INFO)} />
         </div>
     );

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { StylesService } from '../../Torque/StylesService';
-import { ComponentAttributes, ComponentStyling } from '../../Types';
+import { ComponentStyling } from '../../Types';
 import { TorqueAccordianAttributes } from '../../Types/Theme';
 
 

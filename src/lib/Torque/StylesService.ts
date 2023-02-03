@@ -150,7 +150,7 @@ export class StylesService {
                 if (identifiedAttributes) {
                     return identifiedAttributes;
                 } else {
-                    TorqueLogger.log(`Could not find style attributes for component ${identifier}. Please make sure either the identifier exists for the specific component or select a component by an identifier that exists.`, TorqueLogLevel.ERROR);
+                    TorqueLogger.log(`Could not find style attributes for component ${identifier}. Please make sure either the identifier exists for the specific component or select a component by an identifier that exists.`, TorqueLogLevel.WARN);
                     return { styles: { default: {} } } as ComponentAttributes;
                 }
             } else {
